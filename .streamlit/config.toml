@@ -1,0 +1,8 @@
+[theme]
+
+base = "light"
+primaryColor = "#FF6900"  # More saturated orange
+
+[server]
+enableCORS = false
+enableXsrfProtection = false

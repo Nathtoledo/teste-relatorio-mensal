@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Mensal- {{ cliente_nome }} - {{ mes_nome }}/{{ ano }}</title>
+    
+    <style>
+        
+    </style>
+    
+    <!-- CSS específico do relatório -->
+    {% if css_content %}
+    <style>
+        {{ css_content }}
+    </style>
+    {% endif %}
+    
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        {% include "base/header.html" %}
+        
+        {% block content %}{% endblock %}
+        
+        {% include "base/footer.html" %}
+    </div>
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html>

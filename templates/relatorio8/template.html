@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório Mensal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            height: auto !important;   /* em vez de min-height:100% */
+            position: static;          /* não precisa ser relative */
+        }
+
+        /* Contêiner principal para o conteúdo */
+        .main-content {
+            padding: 20px;             /* padding uniforme */
+            padding-bottom: 0;         /* nada de 80px aqui */
+            box-sizing: border-box;
+        }
+
+        /* Cor do nome do relatório e período */
+        .report-name,
+        .report-period {
+            color: #A5A5A5;
+            font-size: 14px;
+        }
+
+        /* Barra laranja acima do cabeçalho */
+        .header-accent {
+            width: 100px;
+            height: 6px;
+            background-color: #FF6900;
+            margin: 0 0 4px 793px; /* Alinha à direita, respeitando o padding de 20px */
+            border-radius: 3px 3px 0 0;
+        }
+
+        /* Cabeçalho acima da primeira caixa */
+        .report-header {
+            border-top: 1px solid #D9D9D9;
+            margin: 0 0 8px 0;
+        }
+
+        /* Container com nome e período */
+        .report-header-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin: 4px 0 16px;
+            white-space: nowrap;
+        }
+
+        /* Estilo base para caixas */
+        .box-frame {
+            page-break-inside: auto;   /* ← permitir quebrar */
+            border: 1px solid #D9D9D9;
+            border-radius: 16px;
+            padding: 32px;
+            margin: 30px 0 18px;
+        }
+
+        /* Classe específica para a caixa de notas do consultor */
+        .box-frame.notes {
+            /* remova a altura mínima fixa */
+            min-height: auto;    /* ou simplesmente delete a linha */
+            display: block;      /* evita bugs de layout do wkhtmltopdf com flex */
+            position: static;    /* não precisa relative aqui */
+            z-index: auto;
+            page-break-inside: auto;   /* já está ok permitir quebrar dentro */
+        }
+
+        /* Classe para caixas em branco */
+        .box-frame.blank {
+            height: 100px;
+            margin: 0 0 24px 0;
+        }
+
+        /* Título da seção */
+        .section-title {
+            font-size: 25px;
+            font-weight: bold;
+            margin-top: 6px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* Conteúdo das notas */
+        .notes-content {
+            font-size: 16px;
+            overflow: visible;   /* em vez de auto */
+        }
+        .main-content > *:last-child { margin-bottom: 0 !important; }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <!-- Barra laranja acima da linha -->
+        <div class="header-accent"></div>
+        <div class="report-header"></div>
+        <table style="width:100%; border-collapse:collapse; margin:4px 0 16px;">
+            <tr>
+                <td class="report-name" style="padding:0; text-align:left;">
+                    {{ data.nome }}
+                </td>
+                <td class="report-period" style="padding:0; text-align:right;">
+                    {{ data.Periodo }}
+                </td>
+            </tr>
+        </table>
+
+        <div class="section">
+            <div class="box-frame notes">
+                <div class="section-title">Nota do Consultor</div>
+                <div class="notes-content">{{ data.nota_consultor | safe }}</div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
